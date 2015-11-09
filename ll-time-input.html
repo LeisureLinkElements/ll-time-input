@@ -50,7 +50,7 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
     },
     timePicked: function (data) {
       this.value = data.display;
-      this.iso = data.iso;
+      this._setIso(data.iso);
     }
 
   });
