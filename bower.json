@@ -1,0 +1,29 @@
+{
+  "name": "ll-time-input",
+  "version": "1.0.0",
+  "authors": [
+    "Charles Koehl <ckoehl@leisurelink.com>"
+  ],
+  "description": "A clickable, read-only text input that launches ll-time-picker to set its display and iso values.",
+  "keywords": [
+    "time",
+    "leisurelink"
+  ],
+  "main": "ll-time-input.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/LeisureLinkElements/ll-time-input",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "ll-theme": "LeisureLinkElements/ll-theme",
+    "iron-input": "PolymerElements/iron-input#~1.0.5"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}
