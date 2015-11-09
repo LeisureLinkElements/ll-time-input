@@ -1,4 +1,4 @@
-# ll-property-information
+# ll-time-input
 
 A clickable, read-only text input that launches ll-time-picker to set its display and iso values.
 
