@@ -29,13 +29,13 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
 
     },
 
-    created: function() {
+    created: function () {
       this.readOnly = true;
     },
 
-    attached: function() {
+    attached: function () {
       this._timePicker = document.getElementById('llTimePicker');
-      if(!this._timePicker) {
+      if (!this._timePicker) {
         this._timePicker = new LLTimePicker();
         document.body.appendChild(this._timePicker);
       }
