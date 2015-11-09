@@ -18,9 +18,7 @@
     "/demo/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
-    "ll-theme": "LeisureLinkElements/ll-theme",
-    "iron-input": "PolymerElements/iron-input#~1.0.5"
+    "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

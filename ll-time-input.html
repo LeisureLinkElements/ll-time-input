@@ -1,9 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-input/iron-input.html">
-<!-- using shared styles in an element -->
-<link rel="import" href="../ll-theme/shared-styles.html">
 
-An element for editing property information
+An extended input element that uses an external ll-date-picker instance to set its display and ISO values.
 
 <!--
 Example:
@@ -14,34 +11,27 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
 
 @demo
 -->
-
-<dom-module id="ll-time-input">
-
-  <style>
-    input[readonly] {
-      background-color: white;
-    }
-  </style>
-
-  <style include="shared-styles"></style>
-
-  <template>
-    <input is="iron-input" type="text" on-tap="_tap" value="[[display]]" class="[[inputClass]]" readonly/>
-  </template>
-
   <script>
 
     LLTimeInput = Polymer({
 
       is: 'll-time-input',
 
+      extends: 'input',
+
       properties: {
 
-        display: String,
+        iso: {
+          type: String,
+          notify: true,
+          readOnly: true
+        },
 
-        iso: String,
-
-        inputClass: String
+        type: {
+          type: String,
+          readOnly: true,
+          reflectToAttribute: true
+        }
 
       },
 
@@ -49,12 +39,10 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
         this.fire('ll-time-picker-open');
       },
       timePicked: function (data) {
-        this.display = data.display;
+        this.value = data.display;
         this.iso = data.iso;
       }
 
     });
 
   </script>
-
-</dom-module>
