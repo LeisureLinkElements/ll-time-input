@@ -26,7 +26,7 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
   <style include="shared-styles"></style>
 
   <template>
-    <input is="iron-input" type="text" on-tap="_tap" value="[[display]]" readonly/>
+    <input is="iron-input" type="text" on-tap="_tap" value="[[display]]" class="[[inputClass]]" readonly/>
   </template>
 
   <script>
@@ -37,13 +37,11 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
 
       properties: {
 
-        display: {
-          type: String
-        },
+        display: String,
 
-        iso: {
-          type: String
-        }
+        iso: String,
+
+        inputClass: String
 
       },
 
