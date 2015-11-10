@@ -21,7 +21,7 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
 
     properties: {
 
-      iso: {
+      dataIso: {
         type: String,
         notify: true,
         reflectToAttribute: true,
@@ -49,22 +49,25 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
     },
 
     timePicked: function (data) {
-      this.value = data.display;
-      this.iso = data.iso;
+      this.dataIso = data.iso;
     },
 
     _tap: function () {
-      this._timePicker.open(this);
+      this._timePicker.open(this, this._isoToDisplay(this.dataIso));
     },
 
-    _isoChanged: function(newVal, oldVal) {
-      console.log('isoChanged');
+    _isoChanged: function (newVal, oldVal) {
       this.value = this._isoToDisplay(newVal);
     },
 
-    _isoToDisplay: function(isoStr) {
+    _isoToDisplay: function (isoStr) {
       var m = moment(isoStr, 'HH:mm:ss');
-      return m.format('h:mm A');
+      if (m.isValid()) {
+        return m.format('h:mm A');
+      } else {
+        throw new Error('Invalid ISO time string: ' + isoStr);
+        return '';
+      }
     }
 
   });
