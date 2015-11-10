@@ -64,9 +64,6 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
       var m = moment(isoStr, 'HH:mm:ss');
       if (m.isValid()) {
         return m.format('h:mm A');
-      } else {
-        throw new Error('Invalid ISO time string: ' + isoStr);
-        return '';
       }
     }
 
