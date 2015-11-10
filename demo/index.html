@@ -11,7 +11,13 @@
 
 <p>An example of <code>&lt;ll-time-input&gt;</code></p>
 
-<input is="ll-time-input" id="check-in-time" class="form-control" data-iso="{{property.checkInTime}}"/>
+<label>Click input to set time:</label><input is="ll-time-input"/>
 
+<p>When time is set via picker...</p>
+<ul>
+  <li>the input's value is set to standard 12-hour AM/PM format; eg: "6:30 PM"</li>
+  <li>the data-iso attribute is set to the ISO format; eg: "18:30:00"</li>
+  <li>the data-iso attribute is two-way bound, so you can bind it to a property of the Polymer element that contains this input; eg:<br><code>&lt;input is="ll-time-input" data-iso={{property.checkInTime}}/&gt</code>;
+  </li></ul>
 </body>
 </html>
