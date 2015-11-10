@@ -22,7 +22,7 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
       iso: {
         type: String,
         notify: true,
-        readOnly: true
+        observer: '_isoChanged'
       },
 
       _timePicker: Object
@@ -44,13 +44,19 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
     listeners: {
       'tap': '_tap'
     },
+    
+    timePicked: function (data) {
+      this.value = data.display;
+      this.iso = data.iso;
+    },
 
     _tap: function () {
       this._timePicker.open(this);
     },
-    timePicked: function (data) {
-      this.value = data.display;
-      this._setIso(data.iso);
+
+    _isoChanged: function(newVal, oldVal) {
+      console.log('isoChanged');
+      this.value = this._timePicker.formatTime(this._timePicker.parseTime(newVal));
     }
 
   });
