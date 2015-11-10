@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
+    "ll-time-picker": "LeisureLinkElements/ll-time-picker",
     "moment": "~2.8.3"
   },
   "devDependencies": {
