@@ -28,6 +28,9 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
         observer: '_isoChanged'
       },
 
+      /**
+       * The one instance of ll-time-picker created by this or another ll-time-input instance.
+       */
       _timePicker: Object
 
     },
@@ -36,6 +39,10 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
       this.readOnly = true;
     },
 
+    /**
+     * Create one instance of ll-time-picker and attach to document body.
+     * Does not create one if another ll-time-input has already done so.
+     */
     attached: function () {
       this._timePicker = document.getElementById('llTimePicker');
       if (!this._timePicker) {
@@ -48,6 +55,11 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
       'tap': '_tap'
     },
 
+    /**
+     * Called by ll-time-picker after user clicks dialog confirmation button.
+     *
+     * @param data {object} Contains display and iso strings. display string not used currently.
+     */
     timePicked: function (data) {
       this.dataIso = data.iso;
     },
@@ -56,10 +68,17 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
       this._timePicker.open(this, this._isoToDisplay(this.dataIso));
     },
 
-    _isoChanged: function (newVal, oldVal) {
+    _isoChanged: function (newVal) {
       this.value = this._isoToDisplay(newVal);
     },
 
+    /**
+     * Converts iso time string like '18:30:22' and converts to '6:30 PM'
+     *
+     * @param isoStr {string}
+     * @returns {string}
+     * @private
+     */
     _isoToDisplay: function (isoStr) {
       var m = moment(isoStr, 'HH:mm:ss');
       if (m.isValid()) {
