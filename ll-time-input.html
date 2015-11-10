@@ -1,5 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../ll-time-picker/ll-time-picker.html">
+
+<script src="../moment/min/moment.min.js"></script>
 <!--
 An extended input element that uses an external ll-date-picker instance to set its display and ISO values.
 
@@ -22,6 +24,7 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
       iso: {
         type: String,
         notify: true,
+        reflectToAttribute: true,
         observer: '_isoChanged'
       },
 
@@ -44,7 +47,7 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
     listeners: {
       'tap': '_tap'
     },
-    
+
     timePicked: function (data) {
       this.value = data.display;
       this.iso = data.iso;
@@ -56,7 +59,12 @@ A clickable, read-only text input that launches ll-time-picker to set its displa
 
     _isoChanged: function(newVal, oldVal) {
       console.log('isoChanged');
-      this.value = this._timePicker.formatTime(this._timePicker.parseTime(newVal));
+      this.value = this._isoToDisplay(newVal);
+    },
+
+    _isoToDisplay: function(isoStr) {
+      var m = moment(isoStr, 'HH:mm:ss');
+      return m.format('h:mm A');
     }
 
   });
