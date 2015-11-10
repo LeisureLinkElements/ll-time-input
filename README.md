@@ -1,6 +1,6 @@
 # ll-time-input
 
-A clickable, read-only text input that launches ll-time-picker to set its display and iso values.
+A clickable, read-only text input that launches ll-time-picker to set its value (for display) and its custom data-iso attribute.
 
 
 ## Dependencies
