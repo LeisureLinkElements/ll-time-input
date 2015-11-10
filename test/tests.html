@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../ll-time-input.html">
+</head>
+<body>
+
+
+<script>
+
+  describe('ll-time-input', function () {
+
+    var myEl = new LLTimeInput();
+
+    describe('initialization', function () {
+
+      it('should create an instance of ll-time-picker in document.body when attached', function () {
+        document.body.appendChild(myEl);
+        expect(document.getElementById('llTimePicker')).to.be.ok;
+      });
+
+    });
+
+    describe('time formatting', function () {
+
+      it('should convert valid ISO time strings to standard AM/PM format', function () {
+        expect(myEl._isoToDisplay('09:32:05')).to.eql('9:32 AM');
+        expect(myEl._isoToDisplay('14:56:00')).to.eql('2:56 PM');
+      });
+
+      it('should convert invalid ISO time string to null', function () {
+        expect(myEl._isoToDisplay('09:87:05')).to.eql(undefined);
+      });
+
+    });
+
+    describe('launching time picker', function () {
+
+      it('should launch time picker when tapped', function (done) {
+        document.body.addEventListener('iron-overlay-opened', function(){
+          done();
+        });
+        myEl.click();
+      });
+
+    });
+
+    describe('receiving new time from time picker', function () {
+
+      it('should receive new time data when time is picked from picker', function (done) {
+        var pickerDialog = document.getElementById('llTimePicker');
+        if(pickerDialog) {
+          pickerDialog.$.picker.addEventListener('time-changed', function(){
+            pickerDialog._picked();
+            expect(myEl.value).to.eql('7:26 AM');
+            expect(myEl.dataIso).to.eql('07:26:00');
+            done();
+          });
+          pickerDialog.$.picker.time = '7:26 AM';
+        }
+      });
+
+    });
+
+  });
+</script>
+
+</body>
+</html>
