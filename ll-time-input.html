@@ -39,6 +39,10 @@ Example:
       this.readOnly = true;
     },
 
+    ready: function() {
+      this.style.cursor = 'pointer';
+    },
+
     /**
      * Create one instance of ll-time-picker and attach to document body.
      * Does not create one if another ll-time-input has already done so.
