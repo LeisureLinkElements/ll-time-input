@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
+<link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
 <link rel="import" href="../ll-time-picker/ll-time-picker.html">
 
 <script src="../moment/min/moment.min.js"></script>
@@ -34,6 +36,8 @@ Example:
       _timePicker: Object
 
     },
+
+    behaviors: [Polymer.IronFormElementBehavior, Polymer.IronValidatableBehavior],
 
     created: function () {
       this.readOnly = true;
