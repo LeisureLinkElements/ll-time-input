@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
+<link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
 <link rel="import" href="../ll-time-picker/ll-time-picker.html">
 
 <script src="../moment/min/moment.min.js"></script>
@@ -28,6 +30,11 @@ Example:
         observer: '_isoChanged'
       },
 
+      value: {
+        type: String,
+        reflectToAttribute: true
+      },
+
       /**
        * The one instance of ll-time-picker created by this or another ll-time-input instance.
        */
@@ -35,11 +42,13 @@ Example:
 
     },
 
+    behaviors: [Polymer.IronFormElementBehavior, Polymer.IronValidatableBehavior],
+
     created: function () {
       this.readOnly = true;
     },
 
-    ready: function() {
+    ready: function () {
       this.style.cursor = 'pointer';
     },
 
@@ -84,9 +93,30 @@ Example:
      * @private
      */
     _isoToDisplay: function (isoStr) {
-      var m = moment(isoStr, 'HH:mm:ss');
-      if (m.isValid()) {
+      var m = this._getValidIsoMoment(isoStr);
+      if (m) {
         return m.format('h:mm A');
+      }
+    },
+
+    _getValidity: function () {
+      var m = this._getValidIsoMoment(this.dataIso);
+      var result = !!m;
+      this._toggleFormGroupError(!result);
+      return result;
+    },
+
+    _toggleFormGroupError: function (hasError) {
+      var par = Polymer.dom(this.root).parentNode;
+      if (par.classList.contains('form-group')) {
+        par.classList.toggle('has-error', hasError);
+      }
+    },
+
+    _getValidIsoMoment: function (str) {
+      var m = moment(str, 'HH:mm:ss');
+      if (m.isValid()) {
+        return m;
       }
     }
 
