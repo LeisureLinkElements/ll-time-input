@@ -101,16 +101,7 @@ Example:
 
     _getValidity: function () {
       var m = this._getValidIsoMoment(this.dataIso);
-      var result = !!m;
-      this._toggleFormGroupError(!result);
-      return result;
-    },
-
-    _toggleFormGroupError: function (hasError) {
-      var par = Polymer.dom(this.root).parentNode;
-      if (par.classList.contains('form-group')) {
-        par.classList.toggle('has-error', hasError);
-      }
+      return !!m;
     },
 
     _getValidIsoMoment: function (str) {
